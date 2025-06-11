@@ -1,0 +1,40 @@
+.container {
+    display: grid;
+    grid-template-columns: 15% 85%;
+    /* 30% sidebar, 70% main content */
+    height: 100vh;
+    /* Full viewport height */
+    width: 100%;
+    /* Full width */
+    margin: 0;
+    /* Remove default margins */
+}
+
+.sidebar {
+    background: #e3f3f5;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+}
+
+.sidebar h2 {
+    color: rgb(85, 85, 85);
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid rgb(85, 85, 85);
+}
+
+.add-project {
+    background-color: rgb(98, 255, 98);
+    border: 1px solid rgb(47, 184, 47);
+    border-radius: 10px;
+}
+
+
+.content {
+    position: relative;
+    background: #ffffff;
+    padding: 20px;
+}
