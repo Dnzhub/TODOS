@@ -1,9 +1,64 @@
-.new-project-card {
+.project-card {
     position: absolute;
-    width: 500px;
-    height: 500px;
-    background-color: antiquewhite;
+    width: 300px;
+    height: 250px;
+    background-color: #e3f3f5;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border: 2px solid #a3edf7;
+    color: rgb(85, 85, 85);
+    z-index: 2
+}
+
+.project {
+    background: none;
+    border: none;
+}
+
+.add-new-project {
+    background-color: rgb(98, 255, 98);
+    border: 1px solid rgb(47, 184, 47);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.new-project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.new-project div {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.new-project-submit {
+    background-color: rgb(98, 255, 98);
+    border: 1px solid rgb(47, 184, 47);
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.new-project-exit-btn {
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: #f44336;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }

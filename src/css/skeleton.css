@@ -16,6 +16,8 @@
     display: flex;
     flex-direction: column;
     position: sticky;
+    align-items: center;
+    gap: 20px
 }
 
 .sidebar h2 {
@@ -26,11 +28,7 @@
     border-bottom: 1px solid rgb(85, 85, 85);
 }
 
-.add-project {
-    background-color: rgb(98, 255, 98);
-    border: 1px solid rgb(47, 184, 47);
-    border-radius: 10px;
-}
+
 
 
 .content {

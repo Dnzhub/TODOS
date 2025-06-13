@@ -11,16 +11,35 @@
     <div class="container">
         <aside class="sidebar">
             <h2>
-                Tasks
+                Projects
             </h2>
-            <button class="add-project">Add Project</button>
+            <button class="add-new-project">Add Project</button>
+            <div class="project-list"></div>
         </aside>
         <main class="content">
-            <div class="new-project-card">
-                Card
+            <div class="blur-background hide"></div>
+            <div class="project-card hide ">
+                <button class="new-project-exit-btn">X</button>
+                <form action="#">
+                    <section class="new-project">
+                        <h2>New Project</h2>
+                        <div>
+                            <label for="project-title">Title</label>
+                            <input type="text" id="project-title" , name="title">
+                        </div>
+                        <div>
+                            <label for="project-color">Color</label>
+                            <input type="color" id="project-color" , name="color" value="#555555">
+                        </div>
+                        <div>
+                            <button class="new-project-submit">Submit</button>
+                        </div>
+                    </section>
+                </form>
             </div>
         </main>
     </div>
+
 </body>
 
 </html>
