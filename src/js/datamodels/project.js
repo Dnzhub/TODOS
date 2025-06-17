@@ -1,7 +1,8 @@
 export default class Project {
-    constructor(title, id) {
+    constructor(title, id, color) {
         this.id = id;
-        this.title = title;
+        this.title = title || "";
+        this.color = color || "#000"; // Default color if not se
         this.todos = [];
     }
 

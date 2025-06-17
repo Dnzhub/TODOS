@@ -99,6 +99,12 @@ textarea {
     box-sizing: border-box;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .blur-background {
     position: fixed;
     /* Covers entire viewport */

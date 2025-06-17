@@ -1,13 +1,22 @@
 export default class Todo {
 
-    constructor(title, description, dueData, priority) {
+    constructor(title, description, dueDate) {
         this.title = title;
         this.description = description;
-        this.dueData = dueData;
-        this.priority = priority;
+        this.dueDate = dueDate;
     }
 
     update(fields) {
         Object.assign(this, fields);
+    }
+
+    getTitle() {
+        return this.title;
+    }
+    getDescription() {
+        return this.description;
+    }
+    getDueDate() {
+        return this.dueDate;
     }
 }

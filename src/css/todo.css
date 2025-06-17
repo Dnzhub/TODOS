@@ -1,0 +1,173 @@
+.todos-content {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    gap: 20px;
+
+}
+
+.add-todo-btn {
+    background: rgb(51, 241, 51);
+    border: 1px solid green;
+    border-radius: 15px;
+    width: 100px;
+    font-size: 0.9rem;
+}
+
+.add-todo-icon {
+    color: rgb(32, 204, 32);
+
+}
+
+.todo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aliceblue;
+    padding: 15px;
+    border: 1px solid rgb(157, 209, 255);
+    margin-top: 20px;
+}
+
+.todo-right,
+.todo-left {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+
+
+#todo-check {
+    width: 15px;
+
+}
+
+.todo-textfields {
+    margin-left: 10px;
+    font-size: 0.85rem;
+}
+
+.todo-textfields :first-child {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.todo-priority,
+.todo-remove-btn,
+.todo-edit-btn {
+    padding: 3px 0px;
+    width: 70px;
+    font-size: 0.9rem;
+
+}
+
+.todo-priority {
+    color: red;
+    text-align: center;
+    width: 85px;
+    font-weight: bold;
+
+}
+
+.todo-remove-btn {
+    background-color: red;
+    color: white;
+    border: 1px solid rgb(109, 9, 9);
+    border-radius: 15px;
+}
+
+.todo-edit-btn {
+    background-color: rgb(219, 140, 21);
+    color: white;
+    border: 1px solid rgb(161, 116, 32);
+    border-radius: 15px;
+}
+
+
+/* New todo creation */
+.todo-card {
+    position: absolute;
+    width: 700px;
+    height: 250px;
+    background-color: aliceblue;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #a3edf7;
+    color: rgb(85, 85, 85);
+    z-index: 2;
+
+
+
+
+}
+
+.todo-card form {
+    width: 100%;
+    height: 100%;
+
+}
+
+.new-todo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+}
+
+
+.new-todo textarea {
+    width: 100%;
+    height: 50px;
+    resize: none;
+    padding: 5px;
+    flex: 1;
+    min-height: 0;
+    border: none;
+    background-color: aliceblue;
+
+
+}
+
+.new-todo textarea:nth-child(2) {
+    font-size: 0.8rem;
+    height: 100px;
+}
+
+.new-todo-bottom {
+    padding: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.new-todo-due-date label {
+    margin-right: 2px;
+}
+
+.new-todo-submit-btn {
+    background-color: rgb(98, 255, 98);
+    border: 1px solid rgb(47, 184, 47);
+    border-radius: 10px;
+}
+
+.new-todo-exit-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: #f44336;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
