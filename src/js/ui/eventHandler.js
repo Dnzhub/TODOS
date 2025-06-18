@@ -1,6 +1,6 @@
 import PubSub from 'pubsub-js';
 
-import { DOM, showElement, closeElement, getNewProjectData, addNewProjectToDOM, getNewTodoData, clearTodos, removeTodoFromUI, fillNewTodoCardElements, setTodoData } from './view.js';
+import { DOM, showElement, closeElement, getNewProjectData, addNewProjectToDOM, getNewTodoData, clearTodos, removeTodoFromUI, fillNewTodoCardElements, setTodoData, setTodoComplete } from './view.js';
 
 let selectedTodo;
 
@@ -70,6 +70,20 @@ export function bindSaveButton(handler) {
         handler(todoID, newTodoData);
     });
 }
+
+export function bindTodoCheckButton(handler) {
+    DOM.todos.addEventListener("click", e => {
+        if (e.target.id === "todo-check") {
+            const closestTodo = e.target.closest('.todo');
+            const checkBox = e.target;
+            const todoID = closestTodo.dataset.id;
+            setTodoComplete(closestTodo, checkBox.checked);
+            handler(todoID);
+        }
+    });
+
+}
+
 export function bindNewTodoButton() {
     DOM.addTodoBtn.addEventListener("click", () => {
         showElement(DOM.newTodoCard, DOM.contentBlur, DOM.newTodoSubmitBtn);

@@ -1,5 +1,6 @@
 import Todo from "./todo";
 
 export default function createTodo(data) {
-    return new Todo(data.title, data.description, data.dueDate, data.id);
+    console.log(data)
+    return new Todo(data.title, data.description, data.dueDate, data.id, data.completed);
 }

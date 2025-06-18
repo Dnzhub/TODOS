@@ -1,11 +1,11 @@
 export default class Todo {
 
-    constructor(title, description, dueDate, id) {
+    constructor(title, description, dueDate, id, completed) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.id = id;
-        this.completed = false;
+        this.completed = completed;
     }
 
     update(fields) {

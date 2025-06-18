@@ -8,7 +8,7 @@ import format from 'date-fns/format';
 import newProject from './js/datamodels/projectFactory.js';
 import newTodo from './js/datamodels/todoFactory.js';
 import * as storage from './storage/storage.js';
-import { bindNewProjectButtons, bindNewTodoButton, bindProjectClicked, bindSaveButton, bindTodoEditButton, bindTodoRemoveButton } from './js/ui/eventHandler.js';
+import { bindNewProjectButtons, bindNewTodoButton, bindProjectClicked, bindSaveButton, bindTodoEditButton, bindTodoRemoveButton, bindTodoCheckButton } from './js/ui/eventHandler.js';
 import * as view from './js/ui/view.js';
 
 let projects = [];
@@ -42,7 +42,6 @@ function loadFromLocalStorage() {
     if (raw) {
         raw.forEach(projectData => {
             const proj = newProject(projectData);
-            console.log(proj);
             projectData.todos.forEach(t => proj.addTodo(newTodo(t)));
             addProjectToDataBase(proj);
 
@@ -110,6 +109,13 @@ bindSaveButton((todoID, todoData) => {
     saveToLocalStorage();
 });
 
+bindTodoCheckButton(todoID => {
+    const todo = selectedProject.getTodos().find(t => t.id === todoID);
+    todo.toggleComplete();
+    saveToLocalStorage();
+
+});
+
 // Load projects from local storage
 loadFromLocalStorage();
 
@@ -120,6 +126,9 @@ setActiveProject(projects[0]);
 // Render initial projects
 view.renderProjects(projects);
 view.renderTodos(projects[0]);
+projects[0].getTodos().forEach(t => {
+    console.log(t);
+})
 view.initializeDate();
 // const data = {
 //     title: "title",

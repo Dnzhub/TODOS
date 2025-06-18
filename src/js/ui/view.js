@@ -134,7 +134,6 @@ export function renderTodos(project) {
     clearTodos();
     project.getTodos().forEach(todo => {
         addTodoToDOM(todo);
-        console.log(todo);
     })
 }
 
@@ -158,6 +157,9 @@ export function addTodoToDOM(newTodo) {
         removeBtn: document.createElement("button"),
 
     }
+
+    elements.checkBox.checked = newTodo.completed ? true : false;
+    elements.title.classList[newTodo.completed ? 'add' : 'remove']('todo-completed');
     elements.todo.classList.add("todo");
     elements.todo.dataset.id = newTodo.id;
     elements.todoLeft.classList.add("todo-left");
@@ -208,10 +210,20 @@ export function setTodoData(todo) {
     const parseDate = parseISO(DOM.newTodoCard.querySelector("#dueDate").value);
     const formattedDate = format(parseDate, 'MMMM d, yyyy');
     const dueDate = todo.querySelector(".todo-dueDate").textContent = formattedDate;
-    console.log(todo.querySelector("#todo-check").checked);
     return {
         title: title,
         description: description,
         dueDate: dueDate,
+    }
+}
+
+export function setTodoComplete(todo, isCompleted) {
+    const todoTitle = todo.querySelector(".todo-title");
+    if (isCompleted) {
+        todoTitle.classList.add("todo-completed");
+    }
+    else {
+        todoTitle.classList.remove("todo-completed");
+
     }
 }
