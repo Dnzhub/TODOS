@@ -1,6 +1,8 @@
 import PubSub from 'pubsub-js';
 
-import { DOM, showElement, closeElement, getNewProjectData, addNewProjectToDOM, getNewTodoData, addTodoToDOM, clearTodos } from './view.js';
+import { DOM, showElement, closeElement, getNewProjectData, addNewProjectToDOM, getNewTodoData, clearTodos, removeTodoFromUI, fillNewTodoCardElements, setTodoData } from './view.js';
+
+let selectedTodo;
 
 //Bind new project form buttons
 export function bindNewProjectButtons() {
@@ -38,15 +40,40 @@ export function bindTodoRemoveButton(handler) {
             const closestTodo = e.target.closest('.todo');
             if (!closestTodo) return;
             const todoID = closestTodo.dataset.id;
-            closestTodo.remove();
+            removeTodoFromUI(closestTodo);
+            // closestTodo.remove();
             handler(todoID);
         }
     })
 }
-
+export function bindTodoEditButton() {
+    DOM.todos.addEventListener("click", e => {
+        if (e.target.classList.contains("todo-edit-btn")) {
+            const closestTodo = e.target.closest('.todo');
+            selectedTodo = closestTodo;
+            if (!closestTodo) return;
+            const todoTitle = closestTodo.querySelector(".todo-title").textContent;
+            const todoDescription = closestTodo.querySelector(".todo-description").textContent;
+            const todoDueDate = closestTodo.querySelector(".todo-dueDate").textContent;
+            fillNewTodoCardElements(todoTitle, todoDescription, todoDueDate);
+            showElement(DOM.newTodoCard, DOM.contentBlur, DOM.editSaveBtn);
+            closeElement(DOM.newTodoSubmitBtn);
+        }
+    });
+}
+export function bindSaveButton(handler) {
+    DOM.editSaveBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const newTodoData = setTodoData(selectedTodo);
+        closeElement(DOM.newTodoCard, DOM.contentBlur);
+        const todoID = selectedTodo.dataset.id;
+        handler(todoID, newTodoData);
+    });
+}
 export function bindNewTodoButton() {
     DOM.addTodoBtn.addEventListener("click", () => {
-        showElement(DOM.newTodoCard, DOM.contentBlur);
+        showElement(DOM.newTodoCard, DOM.contentBlur, DOM.newTodoSubmitBtn);
+        closeElement(DOM.editSaveBtn);
     });
     DOM.newTodoExitBtn.addEventListener("click", () => {
         closeElement(DOM.newTodoCard, DOM.contentBlur);
@@ -58,7 +85,8 @@ export function bindNewTodoButton() {
         const newTodoInfo = "NEW_TODO_INFO";
         PubSub.publish(newTodoInfo, todoData);
 
-    })
+    });
+
 }
 
 

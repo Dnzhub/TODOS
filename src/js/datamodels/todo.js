@@ -5,19 +5,15 @@ export default class Todo {
         this.description = description;
         this.dueDate = dueDate;
         this.id = id;
+        this.completed = false;
     }
 
     update(fields) {
         Object.assign(this, fields);
     }
 
-    getTitle() {
-        return this.title;
+    toggleComplete() {
+        this.completed = !this.completed;
     }
-    getDescription() {
-        return this.description;
-    }
-    getDueDate() {
-        return this.dueDate;
-    }
+
 }

@@ -12,10 +12,10 @@ export const DOM = {
     todos: document.querySelector(".todos-list"),
     addTodoBtn: document.querySelector(".add-todo-btn"),
     newTodoCard: document.querySelector(".todo-card"),
-    addTodoBtn: document.querySelector(".add-todo-btn"),
     projectTitle: document.querySelectorAll(".current-project-title"),
     newTodoExitBtn: document.querySelector(".new-todo-exit-btn"),
     newTodoSubmitBtn: document.querySelector(".new-todo-submit-btn"),
+    editSaveBtn: document.querySelector(".edit-save-btn"),
 };
 
 
@@ -138,6 +138,9 @@ export function renderTodos(project) {
     })
 }
 
+export function removeTodoFromUI(todo) {
+    todo.remove();
+}
 
 
 export function addTodoToDOM(newTodo) {
@@ -162,9 +165,12 @@ export function addTodoToDOM(newTodo) {
     elements.checkBox.id = 'todo-check';
     elements.todoTexts.classList.add("todo-textfields");
     elements.title.textContent = `${newTodo.title}`
+    elements.title.classList.add("todo-title");
     elements.description.textContent = `${newTodo.description}`;
+    elements.description.classList.add("todo-description");
     elements.todoRight.classList.add("todo-right");
     elements.dueDate.textContent = `${newTodo.dueDate}`;
+    elements.dueDate.classList.add("todo-dueDate");
     elements.editBtn.textContent = 'Edit';
     elements.editBtn.classList.add("todo-edit-btn");
     elements.removeBtn.textContent = 'Remove';
@@ -187,3 +193,25 @@ export function initializeDate() {
     dueDate.value = formatISO(new Date(), { representation: 'date' });
 }
 
+//When editing a todo it will fill new todo card form with giving parameters
+export function fillNewTodoCardElements(title, description, dueDate) {
+
+    DOM.newTodoCard.querySelector("#new-todo-title").value = title;
+    DOM.newTodoCard.querySelector("#new-todo-description").value = description;
+    DOM.newTodoCard.querySelector("#dueDate").value = format(dueDate, 'yyyy-MM-dd');
+}
+
+//Set selected todo's data on DOM and return data to send 
+export function setTodoData(todo) {
+    const title = todo.querySelector(".todo-title").textContent = DOM.newTodoCard.querySelector("#new-todo-title").value;
+    const description = todo.querySelector(".todo-description").textContent = DOM.newTodoCard.querySelector("#new-todo-description").value;
+    const parseDate = parseISO(DOM.newTodoCard.querySelector("#dueDate").value);
+    const formattedDate = format(parseDate, 'MMMM d, yyyy');
+    const dueDate = todo.querySelector(".todo-dueDate").textContent = formattedDate;
+    console.log(todo.querySelector("#todo-check").checked);
+    return {
+        title: title,
+        description: description,
+        dueDate: dueDate,
+    }
+}

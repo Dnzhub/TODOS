@@ -148,6 +148,7 @@
     margin-right: 2px;
 }
 
+.edit-save-btn,
 .new-todo-submit-btn {
     background-color: rgb(98, 255, 98);
     border: 1px solid rgb(47, 184, 47);

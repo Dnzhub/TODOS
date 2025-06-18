@@ -17,7 +17,8 @@
     flex-direction: column;
     position: sticky;
     align-items: center;
-    gap: 20px
+    gap: 20px;
+
 }
 
 .sidebar h2 {

@@ -8,7 +8,7 @@ import format from 'date-fns/format';
 import newProject from './js/datamodels/projectFactory.js';
 import newTodo from './js/datamodels/todoFactory.js';
 import * as storage from './storage/storage.js';
-import { bindNewProjectButtons, bindNewTodoButton, bindProjectClicked, bindTodoRemoveButton } from './js/ui/eventHandler.js';
+import { bindNewProjectButtons, bindNewTodoButton, bindProjectClicked, bindSaveButton, bindTodoEditButton, bindTodoRemoveButton } from './js/ui/eventHandler.js';
 import * as view from './js/ui/view.js';
 
 let projects = [];
@@ -94,14 +94,21 @@ bindProjectClicked(id => {
 });
 bindNewTodoButton()
 bindTodoRemoveButton(todoID => {
-    const todo = selectedProject.getTodos().find(t => t.id === todoID);
     selectedProject.removeTodo(todoID);
     saveToLocalStorage();
 
 });
 
-
-
+bindTodoEditButton();
+bindSaveButton((todoID, todoData) => {
+    const todo = selectedProject.getTodos().find(t => t.id === todoID);
+    todo.update({
+        title: todoData.title,
+        description: todoData.description,
+        dueDate: todoData.dueDate,
+    });
+    saveToLocalStorage();
+});
 
 // Load projects from local storage
 loadFromLocalStorage();
