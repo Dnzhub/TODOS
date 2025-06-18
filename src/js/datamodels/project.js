@@ -7,6 +7,7 @@ export default class Project {
     }
 
     addTodo(todo) {
+
         this.todos.push(todo);
     }
 

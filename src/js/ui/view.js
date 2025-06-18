@@ -1,3 +1,6 @@
+
+import { format, parseISO, addDays, subDays, formatISO } from 'date-fns';
+
 export const DOM = {
     sidebar: document.querySelector(".sidebar"),
     newProject: document.querySelector(".project-card"),
@@ -30,9 +33,10 @@ export function closeElement(...elements) {
     })
 }
 
-export function setActiveProjectTitle(title) {
+export function setActiveProjectTitle(title, color) {
     DOM.projectTitle.forEach(element => {
         element.textContent = title;
+        element.style.color = color;
     });
 }
 
@@ -48,15 +52,26 @@ export function getNewProjectData() {
 }
 
 export function getNewTodoData() {
+    const id = crypto.randomUUID();
     const title = document.querySelector("#new-todo-title");
     const description = document.querySelector("#new-todo-description");
     const dueDate = document.querySelector("#dueDate");
+    const parseDate = parseISO(dueDate.value);
+    const formattedDate = format(parseDate, 'MMMM d, yyyy');
 
-    return {
+    const todoData = {
         title: title.value || "title",
         description: description.value || "description",
-        dueDate: dueDate.value
+        dueDate: formattedDate,
+        id: id,
+
     }
+
+    title.value = '';
+    description.value = '';
+    dueDate.value = formatISO(new Date(), { representation: 'date' });
+
+    return todoData;
 }
 
 //Adds single project to DOM
@@ -119,6 +134,7 @@ export function renderTodos(project) {
     clearTodos();
     project.getTodos().forEach(todo => {
         addTodoToDOM(todo);
+        console.log(todo);
     })
 }
 
@@ -140,6 +156,7 @@ export function addTodoToDOM(newTodo) {
 
     }
     elements.todo.classList.add("todo");
+    elements.todo.dataset.id = newTodo.id;
     elements.todoLeft.classList.add("todo-left");
     elements.checkBox.type = 'checkbox';
     elements.checkBox.id = 'todo-check';
@@ -154,7 +171,6 @@ export function addTodoToDOM(newTodo) {
     elements.removeBtn.classList.add("todo-remove-btn");
 
 
-
     elements.todosList.appendChild(elements.todo);
     elements.todo.appendChild(elements.todoLeft);
     elements.todoLeft.append(elements.checkBox, elements.todoTexts);
@@ -163,5 +179,11 @@ export function addTodoToDOM(newTodo) {
     elements.todoRight.append(elements.dueDate, elements.editBtn, elements.removeBtn);
 
 
+}
+
+//Sets default date as today's date
+export function initializeDate() {
+    const dueDate = document.querySelector("#dueDate");
+    dueDate.value = formatISO(new Date(), { representation: 'date' });
 }
 

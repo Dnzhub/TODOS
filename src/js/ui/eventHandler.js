@@ -22,13 +22,26 @@ export function bindNewProjectButtons() {
 
 //Bind event when a project clicked
 export function bindProjectClicked(handler) {
-    DOM.projectList.addEventListener('click', e => {
+    DOM.projectList.addEventListener("click", e => {
         clearTodos();
         const item = e.target.closest('.project-container');
         if (!item) return;
         const projectId = item.dataset.id;
         handler(projectId);
     });
+}
+
+
+export function bindTodoRemoveButton(handler) {
+    DOM.todos.addEventListener("click", e => {
+        if (e.target.classList.contains('todo-remove-btn')) {
+            const closestTodo = e.target.closest('.todo');
+            if (!closestTodo) return;
+            const todoID = closestTodo.dataset.id;
+            closestTodo.remove();
+            handler(todoID);
+        }
+    })
 }
 
 export function bindNewTodoButton() {

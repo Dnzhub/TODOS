@@ -8,7 +8,7 @@ import format from 'date-fns/format';
 import newProject from './js/datamodels/projectFactory.js';
 import newTodo from './js/datamodels/todoFactory.js';
 import * as storage from './storage/storage.js';
-import { bindNewProjectButtons, bindExitButtons, bindNewProjectSubmitButton, bindNewTodoButton, bindProjectClicked } from './js/ui/eventHandler.js';
+import { bindNewProjectButtons, bindNewTodoButton, bindProjectClicked, bindTodoRemoveButton } from './js/ui/eventHandler.js';
 import * as view from './js/ui/view.js';
 
 let projects = [];
@@ -39,10 +39,10 @@ function saveToLocalStorage() {
 
 function loadFromLocalStorage() {
     const raw = storage.load();
-    console.log(raw);
     if (raw) {
         raw.forEach(projectData => {
             const proj = newProject(projectData);
+            console.log(proj);
             projectData.todos.forEach(t => proj.addTodo(newTodo(t)));
             addProjectToDataBase(proj);
 
@@ -66,7 +66,7 @@ function loadFromLocalStorage() {
 }
 function setActiveProject(project) {
     selectedProject = project;
-    view.setActiveProjectTitle(selectedProject.title);
+    view.setActiveProjectTitle(selectedProject.title, selectedProject.color);
 }
 
 //Event Subscribers
@@ -93,7 +93,12 @@ bindProjectClicked(id => {
 
 });
 bindNewTodoButton()
+bindTodoRemoveButton(todoID => {
+    const todo = selectedProject.getTodos().find(t => t.id === todoID);
+    selectedProject.removeTodo(todoID);
+    saveToLocalStorage();
 
+});
 
 
 
@@ -108,6 +113,7 @@ setActiveProject(projects[0]);
 // Render initial projects
 view.renderProjects(projects);
 view.renderTodos(projects[0]);
+view.initializeDate();
 // const data = {
 //     title: "title",
 //     description: "description",
